@@ -1,6 +1,6 @@
 
 const DEFAULT_SETTINGS = {
-  customUrl: 'https://fido.money/call?number={phone}',
+  customUrl: 'https://volta.fido.money?number={phone}',
   enabled: true
 };
 
@@ -56,13 +56,6 @@ async function handlePhoneNumber(phoneNumber, callType, platform, sourceTabId) {
   await openOrUpdateCrmTab(url);
   const tabSwitchTime = Date.now() - tabStartTime;
 
-  if (sourceTabId) {
-    try {
-      chrome.tabs.sendMessage(sourceTabId, { action: 'showAlert', message: `CRM URL generated for ${cleaned}` });
-    } catch (e) {
-    }
-  }
-
   saveCallLog(cleaned, callType, platform || 'Unknown', urlGenTime, tabSwitchTime);
 
   try {
@@ -117,13 +110,13 @@ async function openOrUpdateCrmTab(url) {
   if (crmTabId) {
     try {
       const tab = await chrome.tabs.get(crmTabId);
-      await chrome.tabs.update(crmTabId, { url: url });
+      await chrome.tabs.update(crmTabId, { url: url, active: true });
       return;
     } catch (e) {
     }
   }
 
-  const newTab = await chrome.tabs.create({ url: url, active: false });
+  const newTab = await chrome.tabs.create({ url: url, active: true });
   await chrome.storage.local.set({ crmTabId: newTab.id });
 }
 

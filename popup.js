@@ -1,10 +1,10 @@
 
 const DEFAULT_SETTINGS = {
-  customUrl: 'https://fido.money/call?number={phone}',
+  customUrl: 'https://volta.fido.money?number={phone}',
   enabled: true
 };
 
-// Elements
+
 const customUrlInput = document.getElementById('customUrl');
 const enabledCheckbox = document.getElementById('enabled');
 const saveBtn = document.getElementById('saveBtn');
@@ -14,13 +14,13 @@ const historyList = document.getElementById('historyList');
 const clearHistoryBtn = document.getElementById('clearHistory');
 const exportHistoryBtn = document.getElementById('exportHistory');
 
-// Load settings on open
+
 document.addEventListener('DOMContentLoaded', () => {
   loadSettings();
   loadHistory();
 });
 
-// Event listeners
+
 saveBtn.addEventListener('click', saveSettings);
 resetBtn.addEventListener('click', resetSettings);
 clearHistoryBtn.addEventListener('click', clearHistory);
