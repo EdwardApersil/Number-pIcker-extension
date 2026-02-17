@@ -94,11 +94,11 @@ async function saveCallLog(phoneNumber, callType, platform, urlGenTime, tabSwitc
 
   const data = await chrome.storage.local.get('callHistory');
   const history = data.callHistory || [];
-  
+
   // Add to beginning and keep last 50
   history.unshift(logEntry);
   const trimmedHistory = history.slice(0, 50);
-  
+
   await chrome.storage.local.set({ callHistory: trimmedHistory });
 }
 

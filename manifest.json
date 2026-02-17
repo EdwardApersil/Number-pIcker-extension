@@ -1,39 +1,54 @@
 {
   "manifest_version": 3,
-  "name": "Call Number Picker",
+  "name": "Fido Scout",
   "version": "1.0.0",
   "description": "Detects incoming and outgoing calls, extracts phone numbers, and opens them in a custom URL.",
-  
   "permissions": [
     "storage",
     "tabs",
     "notifications"
   ],
-  
   "host_permissions": [
-    "https://52.49.51.30/*", "https://*.freshdesk.com/*", "https://ec2-52-49-51-30.eu-west-1.compute.amazonaws.com/*", "https://*.freshcaller.com/*", "https://*.freshworks.com/*"
+    "https://52.49.51.30/*",
+    "https://*.freshdesk.com/*",
+    "https://ec2-52-49-51-30.eu-west-1.compute.amazonaws.com/*",
+    "https://*.freshcaller.com/*",
+    "https://*.freshworks.com/*"
   ],
-  
   "background": {
     "service_worker": "background.js"
   },
-  
   "content_scripts": [
     {
-      "matches": ["https://52.49.51.30/*", "https://*.freshdesk.com/*", "https://ec2-52-49-51-30.eu-west-1.compute.amazonaws.com/*", "https://*.freshcaller.com/*", "https://*.freshworks.com/*"],
-      "js": ["injector.js"],
+      "matches": [
+        "https://52.49.51.30/*",
+        "https://*.freshdesk.com/*",
+        "https://ec2-52-49-51-30.eu-west-1.compute.amazonaws.com/*",
+        "https://*.freshcaller.com/*",
+        "https://*.freshworks.com/*"
+      ],
+      "js": [
+        "injector.js"
+      ],
       "run_at": "document_start",
       "all_frames": true,
       "world": "MAIN"
     },
     {
-      "matches": ["https://52.49.51.30/*", "https://*.freshdesk.com/*", "https://ec2-52-49-51-30.eu-west-1.compute.amazonaws.com/*", "https://*.freshcaller.com/*", "https://*.freshworks.com/*"],
-      "js": ["contentScript.js"],
+      "matches": [
+        "https://52.49.51.30/*",
+        "https://*.freshdesk.com/*",
+        "https://ec2-52-49-51-30.eu-west-1.compute.amazonaws.com/*",
+        "https://*.freshcaller.com/*",
+        "https://*.freshworks.com/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     }
   ],
-  
   "action": {
     "default_popup": "popup.html",
     "default_title": "Call Number Picker Settings"

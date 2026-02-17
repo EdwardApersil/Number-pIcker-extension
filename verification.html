@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification</title>
+</head>
+<body>
+    <h1>Verification</h1>
+    <div id="result">Waiting...</div>
+    <script src="injector.js"></script>
+    <script>
+        window.addEventListener('freshcaller-call-detected', function(event) {
+            const detail = event.detail;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = 'Detected: ' + detail.phone;
+            console.log('Verification Result:', detail.phone);
+        });
+
+        // Simulate the event after a short delay to ensure injector is ready
+        setTimeout(() => {
+            console.log({
+                event: 'incoming_call',
+                type: 'incoming',
+                phone_number: '+1800MYCOMPANY', // The agent's number (WRONG)
+                caller_id: '+1555CALLER',       // The caller's number (RIGHT)
+                direction: 'inbound'
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
